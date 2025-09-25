@@ -1,34 +1,29 @@
 {
-  "name": "react-kavia",
+  "name": "remote_assets_frontend",
   "version": "0.1.0",
   "private": true,
+  "description": "Remote React MFE exposing assets via Webpack Module Federation",
+  "main": "dist/remoteEntry.js",
+  "scripts": {
+    "start": "cross-env NODE_ENV=development webpack serve --config webpack.config.js",
+    "build": "cross-env NODE_ENV=production PUBLIC_PATH=/ webpack --config webpack.config.js",
+    "preview": "npx serve -s dist -l 3001"
+  },
   "dependencies": {
     "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "react-scripts": "^5.0.1"
-  },
-  "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
-  },
-  "eslintConfig": {
-    "extends": "react-app"
-  },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
+    "react-dom": "^18.2.0"
   },
   "devDependencies": {
-    "cross-env": "^7.0.3"
+    "@babel/core": "^7.25.2",
+    "@babel/preset-env": "^7.25.4",
+    "@babel/preset-react": "^7.24.7",
+    "babel-loader": "^9.1.3",
+    "cross-env": "^7.0.3",
+    "css-loader": "^7.1.2",
+    "html-webpack-plugin": "^5.6.0",
+    "style-loader": "^4.0.0",
+    "webpack": "^5.95.0",
+    "webpack-cli": "^5.1.4",
+    "webpack-dev-server": "^5.0.4"
   }
 }
