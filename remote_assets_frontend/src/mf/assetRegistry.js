@@ -2,6 +2,9 @@
  * PUBLIC_INTERFACE
  * Returns a registry of exposed asset URLs from this remote.
  * Consumers can import { getAssets } from 'assets/AssetRegistry' after loading the remote.
+ *
+ * Note: Module Federation share scope must be initialized by the host before calling container.get(...).
+ * React dependencies are shared as singletons with eager:false to avoid eager consumption errors.
  */
 export function getAssets(baseUrl = '') {
   /**

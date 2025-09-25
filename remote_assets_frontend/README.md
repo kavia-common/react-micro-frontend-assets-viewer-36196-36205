@@ -17,11 +17,16 @@ npm run build  # output in dist/
 npm run preview
 ```
 
+Local preview:
+- Dev server: http://localhost:3001
+- Remote entry for host: http://localhost:3001/remoteEntry.js
+- Preview build: `npm run preview` serves dist on port 3001
+
 Place the GIF at:
 - public/assets/images/calendar.gif
 
 It will be served at the absolute URL:
-/assets/images/calendar.gif
+- /assets/images/calendar.gif
 
 ## Module Federation
 
@@ -32,9 +37,9 @@ Exposes:
 - `./AssetRegistry` -> `getAssets(baseUrl?)`
 - `./CalendarGifViewer` -> React component
 
-### React sharing configuration
+### React sharing configuration (no eager)
 
-This remote shares `react` and `react-dom` as singletons with `eager: false`. This avoids the runtime error:
+This remote shares `react` and `react-dom` as singletons with `eager: false` and disables runtime chunk splitting for predictable lazy remote loading by hosts. This avoids the runtime error:
 "Shared module is not available for eager consumption: webpack/sharing/consume/default/react/react".
 
 Verification steps:
@@ -43,4 +48,4 @@ Verification steps:
 3) Ensure the host also shares `react` and `react-dom` with `{ singleton: true, eager: false }` and compatible versions.
 4) Load exposed modules with `container.get(...)`.
 
-See MODULE_FEDERATION.md for host integration examples.
+See MODULE_FEDERATION.md for host integration examples and troubleshooting.

@@ -6,6 +6,9 @@ import '../theme.css';
  * CalendarGifViewer is an embeddable component that renders the calendar.gif asset
  * using an absolute URL (/assets/images/calendar.gif). Host apps can mount this component
  * after consuming it via Module Federation from the 'assets' remote.
+ *
+ * Note: This component contains no Module Federation share/consume logic and relies on the host
+ * to initialize share scopes properly (non-eager React/ReactDOM singletons).
  */
 export default function CalendarGifViewer({ height = 320 }) {
   const gifUrl = '/assets/images/calendar.gif';

@@ -7,7 +7,16 @@ const PUBLIC_PATH = process.env.PUBLIC_PATH || '/';
 
 module.exports = {
   mode: process.env.NODE_ENV === 'production' ? 'production' : 'development',
+  target: 'web',
   entry: path.resolve(__dirname, 'src', 'index.js'),
+
+  // Keep a single runtime for the remote build. Some hosts expect the remote's
+  // runtime inside remoteEntry, and eager runtime splitting can complicate loading.
+  // We explicitly disable runtimeChunk here to keep MF lazy-sharing behavior predictable.
+  optimization: {
+    runtimeChunk: false,
+  },
+
   output: {
     publicPath: PUBLIC_PATH,
     filename: '[name].[contenthash].js',
@@ -67,10 +76,10 @@ module.exports = {
         './AssetRegistry': './src/mf/assetRegistry.js',
         './CalendarGifViewer': './src/mf/CalendarGifViewer.jsx',
       },
+      // React sharing must be singleton and non-eager to avoid:
+      // "Shared module is not available for eager consumption: webpack/sharing/consume/default/react/react"
+      // The host must also declare the same shape (singleton + non-eager) and init share scope before loading remotes.
       shared: {
-        // Ensure React is shared as a singleton and NOT eagerly consumed by the remote.
-        // This avoids "Shared module is not available for eager consumption" at runtime
-        // when the host sets up sharing and initializes containers in the standard (non-eager) way.
         react: {
           singleton: true,
           requiredVersion: '^18.2.0',
