@@ -24,6 +24,9 @@ module.exports = {
     port: process.env.PORT || 3001,
     historyApiFallback: true,
     hot: true,
+    // Allow requests from any host to avoid "Invalid Host header" in preview/proxy environments.
+    // See: https://webpack.js.org/configuration/dev-server/#devserverallowedhosts
+    allowedHosts: 'all',
     headers: {
       'Access-Control-Allow-Origin': '*',
     },
