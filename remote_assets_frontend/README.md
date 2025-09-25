@@ -32,4 +32,15 @@ Exposes:
 - `./AssetRegistry` -> `getAssets(baseUrl?)`
 - `./CalendarGifViewer` -> React component
 
+### React sharing configuration
+
+This remote shares `react` and `react-dom` as singletons with `eager: false`. This avoids the runtime error:
+"Shared module is not available for eager consumption: webpack/sharing/consume/default/react/react".
+
+Verification steps:
+1) Start the remote (`npm run start`) or build+preview.
+2) From a host, initialize sharing (`await __webpack_init_sharing__('default')`), then `await window.assets.init(__webpack_share_scopes__.default)`.
+3) Ensure the host also shares `react` and `react-dom` with `{ singleton: true, eager: false }` and compatible versions.
+4) Load exposed modules with `container.get(...)`.
+
 See MODULE_FEDERATION.md for host integration examples.

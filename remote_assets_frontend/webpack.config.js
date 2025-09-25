@@ -68,8 +68,19 @@ module.exports = {
         './CalendarGifViewer': './src/mf/CalendarGifViewer.jsx',
       },
       shared: {
-        react: { singleton: true, requiredVersion: '^18.2.0' },
-        'react-dom': { singleton: true, requiredVersion: '^18.2.0' },
+        // Ensure React is shared as a singleton and NOT eagerly consumed by the remote.
+        // This avoids "Shared module is not available for eager consumption" at runtime
+        // when the host sets up sharing and initializes containers in the standard (non-eager) way.
+        react: {
+          singleton: true,
+          requiredVersion: '^18.2.0',
+          eager: false,
+        },
+        'react-dom': {
+          singleton: true,
+          requiredVersion: '^18.2.0',
+          eager: false,
+        },
       },
     }),
     new HtmlWebpackPlugin({
