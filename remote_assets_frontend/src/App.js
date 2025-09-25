@@ -1,47 +1,33 @@
-import React, { useState, useEffect } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from 'react';
+import './theme.css';
 
-// PUBLIC_INTERFACE
+/**
+ * PUBLIC_INTERFACE
+ * Minimal fallback App component kept for compatibility.
+ * Note: The application actually renders App.jsx from index.js.
+ * This file intentionally avoids CRA-specific imports that do not exist.
+ */
 function App() {
-  const [theme, setTheme] = useState('light');
-
-  // Effect to apply theme to document element
-  useEffect(() => {
-    document.documentElement.setAttribute('data-theme', theme);
-  }, [theme]);
-
-  // PUBLIC_INTERFACE
-  const toggleTheme = () => {
-    setTheme(prevTheme => prevTheme === 'light' ? 'dark' : 'light');
-  };
-
   return (
-    <div className="App">
-      <header className="App-header">
-        <button 
-          className="theme-toggle" 
-          onClick={toggleTheme}
-          aria-label={`Switch to ${theme === 'light' ? 'dark' : 'light'} mode`}
-        >
-          {theme === 'light' ? '🌙 Dark' : '☀️ Light'}
-        </button>
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <p>
-          Current theme: <strong>{theme}</strong>
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="app-shell">
+      <div className="card">
+        <div className="header">
+          <span className="badge">assets remote</span>
+          <div>
+            <div className="title">Remote Assets Frontend</div>
+            <div className="subtitle">This fallback is unused in runtime; App.jsx is rendered.</div>
+          </div>
+        </div>
+        <div className="content">
+          <div className="asset-panel">
+            <div className="asset-url">If you are seeing this, index.js is importing App.js instead of App.jsx.</div>
+          </div>
+        </div>
+        <div className="footer">
+          <span className="hint">Ocean Professional theme</span>
+          <a className="cta" href="/remoteEntry.js" target="_blank" rel="noreferrer">Open remoteEntry.js</a>
+        </div>
+      </div>
     </div>
   );
 }
