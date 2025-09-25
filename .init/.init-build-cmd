@@ -1,0 +1,4 @@
+{
+    "command": "npm install && npx tsc --noEmit && npm test -- --ci",
+    "working_directory": "/home/kavia/workspace/code-generation/react-micro-frontend-assets-viewer-36196-36205/remote_assets_frontend"
+}

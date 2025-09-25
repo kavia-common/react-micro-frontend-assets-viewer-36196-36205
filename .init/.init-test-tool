@@ -1,0 +1,4 @@
+{
+    "command": "npm run test",
+    "working_directory": "/home/kavia/workspace/code-generation/react-micro-frontend-assets-viewer-36196-36205/remote_assets_frontend"
+}
